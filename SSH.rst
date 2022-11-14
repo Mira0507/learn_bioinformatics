@@ -6,24 +6,24 @@ Mira Sohn
 2022-10-31
 
 
-The `SSH (Secure Shell Protocol) <https://www.ssh.com/academy/ssh/protocol>`_ is a way of communicating with remote servers when logging in or transfering files. It provides secure connection by working like key-lock. For me, the most essential use is to authenticate my GitHub account. In this demo, I'll share a straightforward way to create/utilize an SSH key for GitHub authentication based on `the documentation from GitHub <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh>`_ on Linux. Details about other operating systems are found on GitHub.
+The `SSH (Secure Shell Protocol) <https://www.ssh.com/academy/ssh/protocol>`_ is a way of communicating with remote servers when logging in or transfering files. It provides secure connection by working like key-lock. For me, the most essential use is to authenticate my GitHub account. In this demo, I'll share a straightforward way to create/utilize an SSH key for authentication based on `the documentation from GitHub <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh>`_ on Linux. Details about other operating systems are found on GitHub.
 
 
 
-Where's my SSH keys?
---------------------
+Where's my SSH key?
+-------------------
 
 
 
-On Linux machine, the location of SSH keys is ``~/.ssh``. Check whether you have any keys previously created by commanding ``cd ~/.ssh``. What kind of keys do I have? ``ls`` will show you a list of keys which I currently have.
+On a Linux machine, the location of SSH keys is ``~/.ssh``. Check whether you have any keys previously created by commanding ``cd ~/.ssh``. What kind of keys do I have? ``ls`` will show you a list of keys which I currently have.
 
 .. code-block:: bash
 
     $ ls
-    id_rsa  id_rsa.pub
+    authorized_keys  id_rsa  id_rsa.pub  known_hosts
 
 
-It turned out that I have a pair of public (``id_rsa.pub``) and private (``id_rsa``) keys. It's possible to check what your key looks like via the command ``cat <keyname>``. Your public key would look like this:
+I see a pair of public (``id_rsa.pub``) and private (``id_rsa``) keys. It's possible to check what your key looks like via the command ``cat <keyname>``. Your public key would look like this:
 
 
 
@@ -33,23 +33,26 @@ It turned out that I have a pair of public (``id_rsa.pub``) and private (``id_rs
     ssh-rsa <letters and signs> myemail@email.com
 
 
-while your private key would look like this:
+In the meantime, your private key would look like this:
 
 
 .. code-block:: bash
 
     $ cat id_rsa
     -----BEGIN RSA PRIVATE KEY-----
-    <multiple lines of letters and signs>
-    <multiple lines of letters and signs>
-    <multiple lines of letters and signs>
-    <multiple lines of letters and signs>
-    <multiple lines of letters and signs>
-    <multiple lines of letters and signs>
+    <letters and signes>
+    <letters and signes>
+    <letters and signes>
+    <letters and signes>
+    <letters and signes>
+    <letters and signes>
     -----END RSA PRIVATE KEY-----
 
 
-However, I decided to generate a new key in the current demo.
+Why are they a pair? They work like a key and a lock. Your private key (e.g. ``id_rsa``) corresponds to a key by privately stored on your local machine and accessed by limited number of people like yourself. In contrast, your public key (e.g. ``id_rsa.pub``) corresponds to a lock on public places such as `GitHub <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account>`_ or `NIH HPC <https://hpc.nih.gov/docs/sshkeys.html>`_ where you use it for your authentication.
+
+
+How do I create a pair of SSH keys? Let's move on to the next section to answer this question!
 
 
 
@@ -91,9 +94,62 @@ The command ``ssh-keygen`` is used to create an SSH key. Check what the command 
 
 
 
+Let's follow what is guided `here <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key>`_. Assume you're in ``~/.ssh``.
 
-You have to have as many keys as the number of machines which you wish to connect remotely. For example, I have two SSH keys by default being used for my GitHub authentication - one from my local Ubuntu machine and the other one from my work server - since I use Git/GitHub from both machines.
 
+.. code-block:: bash
+
+    ~/.ssh$ ssh-keygen -t ed25519 -C "your_email@example.com"
+
+
+Running above command returns further setting options below:
+
+
+.. code-block:: bash
+
+    enerating public/private ed25519 key pair.
+    Enter file in which to save the key (/home/sohnm/.ssh/id_ed25519):   # <Press enter to skip>
+    Enter passphrase (empty for no passphrase):                          # <Optional. Enter to skip>
+    Enter same passphrase again:                                         # <Optional. Enter to skip>
+
+
+You'll get the following messages as a proof of successful key creation.
+
+
+.. code-block:: bash
+
+    Your identification has been saved in /home/sohnm/.ssh/id_ed25519.
+    Your public key has been saved in /home/sohnm/.ssh/id_ed25519.pub.
+    The key fingerprint is:
+    SHA256:EiZiWkseuxScabC3szzySZ1LOBFpBAu+chyK4KSOjYY your_email@example.com
+    The key's randomart image is:
+    +--[ED25519 256]--+
+    |+..              |
+    |o* +             |
+    |+o^ . o          |
+    |*%.X o .         |
+    |*o@   . S        |
+    |=* B . .         |
+    |EoX +            |
+    |.+ = .           |
+    |  o .            |
+    +----[SHA256]-----+
+
+
+Check your new keys as shown below:
+
+
+.. code-block:: bash
+
+    ~/.ssh$ ls
+    authorized_keys  id_ed25519  id_ed25519.pub  id_rsa  id_rsa.pub  known_hosts
+
+
+You got your private (``id_ed25519``) and public (``id_ed25519``) keys in addition to your old keys.
+
+
+SSH authentication
+------------------
 
 
 
