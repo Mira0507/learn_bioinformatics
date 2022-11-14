@@ -151,4 +151,4 @@ SSH authentication
 ------------------
 
 
-
+My primary use of SSH key is to authenticate my accounts on GitHub and NIH HPC. Before creating a new SSH key, ensure to have match your email address matched. For example, if a key will be used for GitHub, your GitHub account and SSH key have to have the same email address. If a key will be used for NIH HPC, you have to set up the key with your NIH email address like ``ssh-keygen -t ed25519 -C "username@nih.gov"``.
