@@ -107,7 +107,7 @@ Running above command returns further options below:
 .. code-block:: bash
 
     enerating public/private ed25519 key pair.
-    Enter file in which to save the key (/home/sohnm/.ssh/id_ed25519):   # <Press enter to skip>
+    Enter file in which to save the key (/home/user/.ssh/id_ed25519):   # <Press enter to skip>
     Enter passphrase (empty for no passphrase):                          # <Optional. Enter to skip>
     Enter same passphrase again:                                         # <Optional. Enter to skip>
 
@@ -117,8 +117,8 @@ You'll get the following messages as a proof of successful key creation.
 
 .. code-block:: bash
 
-    Your identification has been saved in /home/sohnm/.ssh/id_ed25519.
-    Your public key has been saved in /home/sohnm/.ssh/id_ed25519.pub.
+    Your identification has been saved in /home/user/.ssh/id_ed25519.
+    Your public key has been saved in /home/user/.ssh/id_ed25519.pub.
     The key fingerprint is:
     SHA256:EiZiWkseuxScabC3szzySZ1LOBFpBAu+chyK4KSOjYY your_email@example.com
     The key's randomart image is:
