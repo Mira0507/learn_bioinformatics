@@ -92,7 +92,7 @@ The command ``ssh-keygen`` is used to create an SSH key. Explore the command via
     ssh-keygen -Q -f krl_file file ...
 
 
-
+The flag ``-t`` configures the type of SSH key. In theory, it is expected to create 5 different types (``[-t dsa | ecdsa | ed25519 | rsa | rsa1]``). However, it's possible to fail in some types depending on what your SSH slient supports.
 Let's follow what is guided `here <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key>`_. Assume you're still in ``~/.ssh``.
 
 
