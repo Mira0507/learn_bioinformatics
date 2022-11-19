@@ -3,7 +3,7 @@ Setting up SSH
 
 Mira Sohn
 
-2022-11-13
+2022-11-18
 
 
 The `SSH (Secure Shell Protocol) <https://www.ssh.com/academy/ssh/protocol>`_ is a way of communicating with remote servers when logging in or transfering files. It provides secure connection by working like key-lock. For me, the most essential use is to authenticate my account on public sites/servers. In this demo, I'll share a straightforward way to create/utilize an SSH key for authentication based on `the documentation from GitHub <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh>`_ on Linux. Details about other operating systems are found on GitHub.
@@ -33,7 +33,7 @@ I see a pair of public (``id_rsa.pub``) and private (``id_rsa``) keys. It's poss
     ssh-rsa AAAAC3NzaC1lZDI1NTE5AAAAIHhPPIqNSZHUwUfNOPRNXquHqbKzZrppQsMGSy6V1PDo myemail@email.com
 
 
-In the meantime, your private key would look like this:
+while your private key would look like this:
 
 
 .. code-block:: bash
@@ -59,7 +59,7 @@ Creating a new SSH key
 ----------------------
 
 
-The command ``ssh-keygen`` is used to create an SSH key. Explore the command via ``ssh-keygen --help``.
+The command ``ssh-keygen`` is used to create SSH keys. Explore the command via ``ssh-keygen --help``.
 
 
 .. code-block:: bash
@@ -92,8 +92,9 @@ The command ``ssh-keygen`` is used to create an SSH key. Explore the command via
     ssh-keygen -Q -f krl_file file ...
 
 
-The flag ``-t`` configures the type of SSH key. In theory, it is expected to create 5 different types (``[-t dsa | ecdsa | ed25519 | rsa | rsa1]``). However, it's possible to fail in some types depending on what your SSH slient supports.
-Let's follow what is guided `here <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key>`_. Assume you're still in ``~/.ssh``.
+The flag ``-t`` configures the type of SSH key. Technically, there are 5 different options (``[-t dsa | ecdsa | ed25519 | rsa | rsa1]``). However, it's possible that your SSH client supports only limited options.
+
+Let's create your SSH key by following the `guide <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key>`_. Assume you're still in ``~/.ssh``.
 
 
 .. code-block:: bash
@@ -151,4 +152,7 @@ SSH authentication
 ------------------
 
 
-My primary use of SSH key is to authenticate my accounts on GitHub and NIH HPC. Before creating a new SSH key, ensure to have match your email address matched. For example, if a key will be used for GitHub, your GitHub account and SSH key have to have the same email address. If a key will be used for NIH HPC, you have to set up the key with your NIH email address like ``ssh-keygen -t ed25519 -C "username@nih.gov"``.
+My primary use of SSH key is to authenticate my accounts on public places by copying either public key files or fingerprints (e.g. ``ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhPPIqNSZHUwUfNOPRNXquHqbKzZrppQsMGSy6V1PDo your_email@example.com``). Before creating a new SSH key, ensure to have your email address matched. For example, if a key will be used for GitHub, your GitHub account and SSH key have to have the same email address. If a key will be used for NIH HPC, you have to set up the key with your NIH email address like ``ssh-keygen -t ed25519 -C "username@nih.gov"``.
+
+.. image:: images/github_ssh.png
+    :width: 800
