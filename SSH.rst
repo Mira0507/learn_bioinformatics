@@ -152,7 +152,8 @@ SSH authentication
 ------------------
 
 
-My primary use of SSH key is to authenticate my accounts on public places by copying either public key files or fingerprints (e.g. ``ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhPPIqNSZHUwUfNOPRNXquHqbKzZrppQsMGSy6V1PDo your_email@example.com``). Before creating a new SSH key, ensure to have your email address matched. For example, if a key will be used for GitHub, your GitHub account and SSH key have to have the same email address. If a key will be used for NIH HPC, you have to set up the key with your NIH email address like ``ssh-keygen -t ed25519 -C "username@nih.gov"``.
+My primary use of SSH key is to authenticate my accounts on public places by copying either public key files or fingerprints (e.g. ``ssh-ed25519 EiZiWkseuxScabC3szzySZ1LOBFpBAu+chyK4KSOjYY your_email@example.com``) saved in the public key. When creating a new SSH keys, you have to have your email address matched between your SSH key and public server (e.g. GitHub). If you're creating SSH keys to use on your work server, you would set the email address to your work email (e.g. ``user@nih.gov``).
+
 
 .. image:: images/github_ssh.png
     :width: 800
